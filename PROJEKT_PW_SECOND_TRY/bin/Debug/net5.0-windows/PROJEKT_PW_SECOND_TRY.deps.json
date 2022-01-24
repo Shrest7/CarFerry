@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "PROJEKT_PW_SECOND_TRY/1.0.0": {
+        "runtime": {
+          "PROJEKT_PW_SECOND_TRY.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PROJEKT_PW_SECOND_TRY/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
