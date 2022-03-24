@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "840ae541-d29c-4ecd-88c4-7b5b9a2e45e3": {
+      "ProjectGuid": "840ae541-d29c-4ecd-88c4-7b5b9a2e45e3",
+      "DisplayName": "Concurrent_programming",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}
