@@ -59,7 +59,7 @@ namespace PROJEKT_PW_FINAL_TRY
             this.pictureBox28 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblPowodOdplyniecia = new System.Windows.Forms.Label();
+            this._departureReasonLbl = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -300,7 +300,7 @@ namespace PROJEKT_PW_FINAL_TRY
             // 
             // promPictureBox
             // 
-            this.promPictureBox.Image = global::PROJEKT_PW_WINFORMS.Properties.Resources.prom;
+            this.promPictureBox.Image = global::PROJEKT_PW_WINFORMS.Properties.Resources.Ferry;
             this.promPictureBox.Location = new System.Drawing.Point(612, 370);
             this.promPictureBox.Name = "promPictureBox";
             this.promPictureBox.Size = new System.Drawing.Size(133, 245);
@@ -380,18 +380,18 @@ namespace PROJEKT_PW_FINAL_TRY
             this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label2.Location = new System.Drawing.Point(72, 173);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(192, 30);
+            this.label2.Size = new System.Drawing.Size(179, 30);
             this.label2.TabIndex = 31;
-            this.label2.Text = "Powód odpłynięcia:";
+            this.label2.Text = "Departure reason:";
             // 
-            // lblPowodOdplyniecia
+            // _departureReasonLbl
             // 
-            this.lblPowodOdplyniecia.AutoSize = true;
-            this.lblPowodOdplyniecia.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPowodOdplyniecia.Location = new System.Drawing.Point(34, 199);
-            this.lblPowodOdplyniecia.Name = "lblPowodOdplyniecia";
-            this.lblPowodOdplyniecia.Size = new System.Drawing.Size(0, 30);
-            this.lblPowodOdplyniecia.TabIndex = 32;
+            this._departureReasonLbl.AutoSize = true;
+            this._departureReasonLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this._departureReasonLbl.Location = new System.Drawing.Point(34, 199);
+            this._departureReasonLbl.Name = "_departureReasonLbl";
+            this._departureReasonLbl.Size = new System.Drawing.Size(0, 30);
+            this._departureReasonLbl.TabIndex = 32;
             // 
             // label3
             // 
@@ -583,7 +583,7 @@ namespace PROJEKT_PW_FINAL_TRY
             this.label21.TabIndex = 51;
             this.label21.Text = "1";
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -607,7 +607,7 @@ namespace PROJEKT_PW_FINAL_TRY
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.lblPowodOdplyniecia);
+            this.Controls.Add(this._departureReasonLbl);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox28);
@@ -639,7 +639,7 @@ namespace PROJEKT_PW_FINAL_TRY
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -706,7 +706,7 @@ namespace PROJEKT_PW_FINAL_TRY
         private System.Windows.Forms.PictureBox pictureBox28;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblPowodOdplyniecia;
+        private System.Windows.Forms.Label _departureReasonLbl;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

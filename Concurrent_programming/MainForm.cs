@@ -15,201 +15,204 @@ namespace PROJEKT_PW_FINAL_TRY
 {
     public partial class MainForm : Form
     {
-        public readonly static object listObj = new object();
-        public const int iloscMiejscParkingowych = 10;
-        public PictureBox[] parkingPierwszyBrzeg;
-        public PictureBox[] parkingDrugiBrzeg;
-        public Label[] labelePierwszyBrzeg;
-        public Label[] labeleDrugiBrzeg;
-        private readonly PictureBox[] miejscaPromu;
-        private readonly SemaphoreSlim wolneMiejsca =
-            new SemaphoreSlim(maxPojemnoscPromu, maxPojemnoscPromu);
-        public int indexSamochodu;
-        public int indexP1;
-        public int indexP2;
-        public const int maxPojemnoscPromu = 4;
-        public List<Samochod> samochodyPierwszyBrzeg = new List<Samochod>();
-        public List<Samochod> samochodyDrugiBrzeg = new List<Samochod>();
-        private readonly Prom prom;
-        private readonly Random rng = new Random();
+        public readonly static object listObj = new object(); // change
+        private const int _numberOfParkingSpaces = 10;
+        private const int _ferryCapacity = 6;
+        private readonly PictureBox[] _parkingFirstRiverbank;
+        private readonly PictureBox[] _parkingSecondRiverbank;
+        private readonly PictureBox[] _ferryParkingSpaces;
+        private readonly Label[] _firstRiverbankLabels;
+        private readonly Label[] _secondRiverbankLabels;
+        private readonly SemaphoreSlim _onBoardPlacesAvailable =
+            new SemaphoreSlim(_ferryCapacity, _ferryCapacity);
+        private int _carId;
+        private int _firstRiverbankIndex; // change
+        private int _secondRiverbankIndex; // change
+        private readonly List<Car> _carsFirstRiverbank = new List<Car>();
+        private readonly List<Car> _carsSecondRiverbank = new List<Car>();
+        private readonly Ferry _ferry;
 
         public MainForm()
         {
             InitializeComponent();
-            parkingPierwszyBrzeg = new PictureBox[iloscMiejscParkingowych] { pictureBox2, pictureBox3, pictureBox4,
+
+            _parkingFirstRiverbank = new PictureBox[_numberOfParkingSpaces] { pictureBox2, pictureBox3, pictureBox4,
                                                                         pictureBox6, pictureBox7, pictureBox8, pictureBox9,
                                                                         pictureBox10, pictureBox11, pictureBox12};
-            labelePierwszyBrzeg = new Label[iloscMiejscParkingowych] {label1, label3, label4, label5, label6, label7,
-                                                                        label8, label9, label10, label11 };
-            labeleDrugiBrzeg = new Label[iloscMiejscParkingowych] {label12, label13, label14, label15, label16, label17,
-                                                                        label18, label19, label20, label21 };
-            parkingDrugiBrzeg = new PictureBox[iloscMiejscParkingowych] { pictureBox21, pictureBox20, pictureBox19,
+            _parkingSecondRiverbank = new PictureBox[_numberOfParkingSpaces] { pictureBox21, pictureBox20, pictureBox19,
                                                                         pictureBox5, pictureBox13, pictureBox14, pictureBox15,
                                                                         pictureBox16,pictureBox17,pictureBox18 };
-            miejscaPromu = new PictureBox[6] {pictureBox23, pictureBox24, pictureBox25,
+            _firstRiverbankLabels = new Label[_numberOfParkingSpaces] {label1, label3, label4, label5, label6, label7,
+                                                                        label8, label9, label10, label11 };
+            _secondRiverbankLabels = new Label[_numberOfParkingSpaces] {label12, label13, label14, label15, label16, label17,
+                                                                        label18, label19, label20, label21 };
+            _ferryParkingSpaces = new PictureBox[_ferryCapacity] {pictureBox23, pictureBox24, pictureBox25,
                                                 pictureBox26, pictureBox27, pictureBox28};
-            prom = new Prom(promPictureBox, miejscaPromu, lblPowodOdplyniecia);
-            ZmianyKosmetyczne();
+            _ferry = new Ferry(promPictureBox, _ferryParkingSpaces, _departureReasonLbl);
 
-            Thread watekGlowny = new Thread(FunkcjaGlownegoWatka);
-            watekGlowny.Start();
+            CosmeticChanges();
+            Thread mainThread = new Thread(MainThreadMethod);
+            mainThread.Start();
         }
 
-        public void FunkcjaGlownegoWatka()
+        public void MainThreadMethod()
         {
-            Thread generatorSamochodow = new Thread(GenerujSamochody);
-            generatorSamochodow.Start();
+            Thread carGenerator = new Thread(GenerateCars);
+            carGenerator.Start();
 
             while (true)
             {
-                if (prom.Brzeg == 1 && samochodyPierwszyBrzeg.Count >= maxPojemnoscPromu)
+                if (_ferry.RiverBank == 1 && _carsFirstRiverbank.Count >= _ferryCapacity)
                 {
-                    if (prom.Samochody.Count == maxPojemnoscPromu)
+                    if (_ferry.Cars.Count == _ferryCapacity)
                     {
-                        lblPowodOdplyniecia.Invoke((Action)(() => lblPowodOdplyniecia.Text = "Prom zapelnil sie samochodami"));
-                        prom.Plyn();
+                        _departureReasonLbl.Invoke((Action)(() => _departureReasonLbl.Text = "Ferry is full."));
+                        _ferry.Travel();
                     }
                 }
-                else if (prom.Brzeg == 2 && samochodyDrugiBrzeg.Count >= maxPojemnoscPromu)
+                else if (_ferry.RiverBank == 2 && _carsSecondRiverbank.Count >= _ferryCapacity)
                 {
-                    if (prom.Samochody.Count == maxPojemnoscPromu)
+                    if (_ferry.Cars.Count == _ferryCapacity)
                     {
-                        lblPowodOdplyniecia.Invoke((Action)(() => lblPowodOdplyniecia.Text = "Prom zapelnil sie samochodami"));
-                        prom.Plyn();
+                        _departureReasonLbl.Invoke((Action)(() => _departureReasonLbl.Text = "Ferry is full."));
+                        _ferry.Travel();
                     }
                 }
-                else if (prom.Brzeg == 1 && samochodyDrugiBrzeg.Count >= maxPojemnoscPromu)
+                else if (_ferry.RiverBank == 1 && _carsSecondRiverbank.Count >= _ferryCapacity)
                 {
-                    int stanBrzegu = samochodyPierwszyBrzeg.Count;
-                    while (stanBrzegu != prom.Samochody.Count)
+                    int numberOfCarsFirstRiverbank = _carsFirstRiverbank.Count;
+                    while (numberOfCarsFirstRiverbank != _ferry.Cars.Count)
                     {
 
                     }
-                    lblPowodOdplyniecia.Invoke((Action)(() => lblPowodOdplyniecia.Text = "Przeciwny (drugi) brzeg jest pelen."));
-                    prom.Plyn();
+                    _departureReasonLbl.Invoke((Action)(() => _departureReasonLbl.Text = "Opposite riverbank has enough" +
+                        "cars to fully fill the ferry."));
+                    _ferry.Travel();
                     
                 }
-                else if (prom.Brzeg == 2 && samochodyPierwszyBrzeg.Count >= maxPojemnoscPromu)
+                else if (_ferry.RiverBank == 2 && _carsFirstRiverbank.Count >= _ferryCapacity)
                 {
-                    int stanBrzegu = samochodyDrugiBrzeg.Count;
-                    while (stanBrzegu != prom.Samochody.Count)
+                    int numberOfCarsSecondRiverbank = _carsSecondRiverbank.Count;
+                    while (numberOfCarsSecondRiverbank != _ferry.Cars.Count)
                     {
 
                     }
-                    lblPowodOdplyniecia.Invoke((Action)(() => lblPowodOdplyniecia.Text = "Przeciwny (pierwszy) brzeg jest pelen."));
-                    prom.Plyn();
+                    _departureReasonLbl.Invoke((Action)(() => _departureReasonLbl.Text = "Opposite riverbank has enough" +
+                        "cars to fully fill the ferry."));
+                    _ferry.Travel();
                     
                 }
-                else if (prom.czasomierzOczekiwania.ElapsedMilliseconds > prom.ProgCierpliwosci)
+                else if (_ferry.WaitStopwatch.ElapsedMilliseconds > _ferry.PatienceThreshold)
                 {
-                    lblPowodOdplyniecia.Invoke((Action)(() => lblPowodOdplyniecia.Text = "Prom stracil cierpliwosc."));
-                    prom.Plyn();
+                    _departureReasonLbl.Invoke((Action)(() => _departureReasonLbl.Text = "Ferry has lost patience."));
+                    _ferry.Travel();
                 }
 
-                UsunSamochody();
+                ClearCars();
             }
         }
 
-        private void UsunSamochody()
+        private void ClearCars()
         {
-            foreach (var samochod in samochodyPierwszyBrzeg.ToArray())
+            foreach (var car in _carsFirstRiverbank.ToArray())
             {
-                if(samochod is not null)
+                if(car is not null)
                 {
-                    if (samochod.PrzeprawaUkonczona == true)
+                    if (car.TravelFinished == true)
                     {
                         lock (listObj)
                         {
-                            samochodyPierwszyBrzeg.Remove(samochod);
-                            prom.Samochody.Remove(samochod);
+                            _carsFirstRiverbank.Remove(car);
+                            _ferry.Cars.Remove(car);
                         }
                     }
                 }
             }
 
-            foreach (var samochod in samochodyDrugiBrzeg.ToArray())
+            foreach (var car in _carsSecondRiverbank.ToArray())
             {
-                if (samochod is not null)
+                if (car is not null)
                 {
-                    if (samochod.PrzeprawaUkonczona == true)
+                    if (car.TravelFinished == true)
                     {
                         lock (listObj)
                         {
-                            samochodyDrugiBrzeg.Remove(samochod);
-                            prom.Samochody.Remove(samochod);
+                            _carsSecondRiverbank.Remove(car);
+                            _ferry.Cars.Remove(car);
                         }
                     }
                 }
             }
         }
 
-        private void GenerujSamochody()
+        private void GenerateCars()
         {
-            Samochod samochod;
-            int idPictureBoxa;
+            Random rng = new Random();
+            Car car;
+            int pictureBoxId;
             while (true)
             {
                 if (rng.Next(20) < 10)
                 {
-                    idPictureBoxa = indexP1 % (iloscMiejscParkingowych - 1);
-                    samochod = new Samochod(indexSamochodu, 1, prom, parkingPierwszyBrzeg[idPictureBoxa],
-                        labelePierwszyBrzeg[idPictureBoxa], wolneMiejsca);
+                    pictureBoxId = _firstRiverbankIndex % (_numberOfParkingSpaces - 1);
+                    car = new Car(_carId, 1, _ferry, _parkingFirstRiverbank[pictureBoxId],
+                        _firstRiverbankLabels[pictureBoxId], _onBoardPlacesAvailable);
 
-                    parkingPierwszyBrzeg[idPictureBoxa].Invoke((Action)(() => WyswietlSamochodPierwszyBrzeg(idPictureBoxa)));
+                    _parkingFirstRiverbank[pictureBoxId].Invoke((Action)(() => ShowCarFirstRiverbank(pictureBoxId)));
 
                     lock (listObj)
                     {
-                        samochodyPierwszyBrzeg.Add(samochod);
+                        _carsFirstRiverbank.Add(car);
                     }
-                    samochod.Start();
-                    indexP1++;
+                    car.Start();
+                    _firstRiverbankIndex++;
                 }
                 else
                 {
-                    idPictureBoxa = indexP2 % (iloscMiejscParkingowych - 1);
-                    samochod = new Samochod(indexSamochodu, 2, prom, parkingDrugiBrzeg[idPictureBoxa],
-                        labeleDrugiBrzeg[idPictureBoxa], wolneMiejsca);
+                    pictureBoxId = _secondRiverbankIndex % (_numberOfParkingSpaces - 1);
+                    car = new Car(_carId, 2, _ferry, _parkingSecondRiverbank[pictureBoxId],
+                        _secondRiverbankLabels[pictureBoxId], _onBoardPlacesAvailable);
 
-                    parkingDrugiBrzeg[idPictureBoxa].Invoke((Action)(() =>WyswietlSamochodDrugiBrzeg(idPictureBoxa)));
+                    _parkingSecondRiverbank[pictureBoxId].Invoke((Action)(() => ShowCarSecondRiverbank(pictureBoxId)));
 
                     lock (listObj)
                     {
-                        samochodyDrugiBrzeg.Add(samochod);
+                        _carsSecondRiverbank.Add(car);
                     }
-                    samochod.Start();
-                    indexP2++;
+                    car.Start();
+                    _secondRiverbankIndex++;
                 }
-                Thread.Sleep(rng.Next(1500, 2250));
-                indexSamochodu++;
+                Thread.Sleep(rng.Next(1000, 1750));
+                _carId++;
             }
         }
 
-        public void WyswietlSamochodPierwszyBrzeg(int idPictureBoxa)
+        public void ShowCarFirstRiverbank(int pictureBoxId)
         {
-            parkingPierwszyBrzeg[idPictureBoxa].Image = Resources.samochod;
-            labelePierwszyBrzeg[idPictureBoxa].Text = $"{indexSamochodu}";
+            _parkingFirstRiverbank[pictureBoxId].Image = Resources.Car;
+            _firstRiverbankLabels[pictureBoxId].Text = $"{_carId}";
         }
-        public void WyswietlSamochodDrugiBrzeg(int idPictureBoxa)
+        public void ShowCarSecondRiverbank(int pictureBoxId)
         {
-            parkingDrugiBrzeg[idPictureBoxa].Image = Resources.samochod;
-            labeleDrugiBrzeg[idPictureBoxa].Text = $"{indexSamochodu}";
+            _parkingSecondRiverbank[pictureBoxId].Image = Resources.Car;
+            _secondRiverbankLabels[pictureBoxId].Text = $"{_carId}";
         }
 
-        public void ZmianyKosmetyczne()
+        public void CosmeticChanges()
         {
             label2.Parent = pictureBox1;
             label2.BackColor = Color.Transparent;
-            lblPowodOdplyniecia.Parent = pictureBox1;
-            lblPowodOdplyniecia.BackColor = Color.Transparent;
+            _departureReasonLbl.Parent = pictureBox1;
+            _departureReasonLbl.BackColor = Color.Transparent;
             label2.ForeColor = Color.White;
-            lblPowodOdplyniecia.ForeColor = Color.White;
+            _departureReasonLbl.ForeColor = Color.White;
 
-            foreach(var label in labelePierwszyBrzeg)
+            foreach(var label in _firstRiverbankLabels)
             {
                 label.Text = "";
             }
 
-            foreach (var label in labeleDrugiBrzeg)
+            foreach (var label in _secondRiverbankLabels)
             {
                 label.Text = "";
             }

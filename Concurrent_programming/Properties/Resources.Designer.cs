@@ -63,9 +63,9 @@ namespace PROJEKT_PW_WINFORMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap prom {
+        internal static System.Drawing.Bitmap Car {
             get {
-                object obj = ResourceManager.GetObject("prom", resourceCulture);
+                object obj = ResourceManager.GetObject("Car", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace PROJEKT_PW_WINFORMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap samochod {
+        internal static System.Drawing.Bitmap Ferry {
             get {
-                object obj = ResourceManager.GetObject("samochod", resourceCulture);
+                object obj = ResourceManager.GetObject("Ferry", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

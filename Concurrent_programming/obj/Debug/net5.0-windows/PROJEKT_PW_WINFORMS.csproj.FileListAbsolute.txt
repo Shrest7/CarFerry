@@ -6,8 +6,6 @@ C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\obj\Debu
 C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\obj\Debug\net5.0-windows\PROJEKT_PW_WINFORMS.AssemblyInfo.cs
 C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\obj\Debug\net5.0-windows\PROJEKT_PW_WINFORMS.csproj.CoreCompileInputs.cache
 C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\bin\Debug\net5.0-windows\PROJEKT_PW_WINFORMS.exe
-C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\bin\Debug\net5.0-windows\Properties\prom.png
-C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\bin\Debug\net5.0-windows\Properties\samochod.png
 C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\bin\Debug\net5.0-windows\PROJEKT_PW_WINFORMS.deps.json
 C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\bin\Debug\net5.0-windows\PROJEKT_PW_WINFORMS.runtimeconfig.json
 C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\bin\Debug\net5.0-windows\PROJEKT_PW_WINFORMS.runtimeconfig.dev.json
@@ -19,3 +17,4 @@ C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\obj\Debu
 C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\obj\Debug\net5.0-windows\PROJEKT_PW_WINFORMS.pdb
 C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\obj\Debug\net5.0-windows\PROJEKT_PW_WINFORMS.genruntimeconfig.cache
 C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\obj\Debug\net5.0-windows\PROJEKT_PW_FINAL_TRY.MainForm.resources
+C:\Users\dravi\source\repos\PROJEKT_PW_FINAL_TRY\Concurrent_programming\bin\Debug\net5.0-windows\Properties\Car.png

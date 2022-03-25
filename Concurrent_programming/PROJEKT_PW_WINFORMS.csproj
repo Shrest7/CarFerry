@@ -26,10 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Properties\prom.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Properties\samochod.png">
+    <None Update="Properties\Car.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
