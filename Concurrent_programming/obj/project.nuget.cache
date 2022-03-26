@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "alu0omMhPC04EUuzo2qaLqPWAycYpm5GfBhyg6+rm1Em0z1cwPIOLVpNUhKBftfXu4rJ8BILNMyJ5eO4DmalDQ==",
+  "dgSpecHash": "MZxZEvb3riun/Z7S0vs+7vwmqLEQ5CamDCbzjbB9kUL+UtKYWMqu2KK5UNwuRTB2TlDmFZyfsZ6C2Y2x07fHlg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dravi\\source\\repos\\PROJEKT_PW_FINAL_TRY\\Concurrent_programming\\PROJEKT_PW_WINFORMS.csproj",
+  "projectFilePath": "C:\\Users\\dravi\\source\\repos\\PROJEKT_PW_FINAL_TRY\\Concurrent_programming\\CarFerry.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dravi\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.14\\microsoft.netcore.app.host.win-x64.5.0.14.nupkg.sha512"
   ],

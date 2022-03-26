@@ -58,7 +58,6 @@ namespace PROJEKT_PW_FINAL_TRY
             this.pictureBox27 = new System.Windows.Forms.PictureBox();
             this.pictureBox28 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this._departureReasonLbl = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -300,7 +299,7 @@ namespace PROJEKT_PW_FINAL_TRY
             // 
             // promPictureBox
             // 
-            this.promPictureBox.Image = global::PROJEKT_PW_WINFORMS.Properties.Resources.Ferry;
+            this.promPictureBox.Image = global::CarFerry.Properties.Resources.Ferry;
             this.promPictureBox.Location = new System.Drawing.Point(612, 370);
             this.promPictureBox.Name = "promPictureBox";
             this.promPictureBox.Size = new System.Drawing.Size(133, 245);
@@ -371,18 +370,6 @@ namespace PROJEKT_PW_FINAL_TRY
             this.label1.Size = new System.Drawing.Size(22, 25);
             this.label1.TabIndex = 30;
             this.label1.Text = "1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label2.Location = new System.Drawing.Point(72, 173);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(179, 30);
-            this.label2.TabIndex = 31;
-            this.label2.Text = "Departure reason:";
             // 
             // _departureReasonLbl
             // 
@@ -487,7 +474,7 @@ namespace PROJEKT_PW_FINAL_TRY
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(19, 72);
+            this.label12.Location = new System.Drawing.Point(26, 71);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(22, 25);
             this.label12.TabIndex = 42;
@@ -608,7 +595,6 @@ namespace PROJEKT_PW_FINAL_TRY
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this._departureReasonLbl);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox28);
             this.Controls.Add(this.pictureBox27);
@@ -705,7 +691,6 @@ namespace PROJEKT_PW_FINAL_TRY
         private System.Windows.Forms.PictureBox pictureBox27;
         private System.Windows.Forms.PictureBox pictureBox28;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label _departureReasonLbl;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

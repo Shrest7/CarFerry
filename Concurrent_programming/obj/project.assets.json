@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dravi\\source\\repos\\PROJEKT_PW_FINAL_TRY\\Concurrent_programming\\PROJEKT_PW_WINFORMS.csproj",
-      "projectName": "PROJEKT_PW_WINFORMS",
-      "projectPath": "C:\\Users\\dravi\\source\\repos\\PROJEKT_PW_FINAL_TRY\\Concurrent_programming\\PROJEKT_PW_WINFORMS.csproj",
+      "projectUniqueName": "C:\\Users\\dravi\\source\\repos\\PROJEKT_PW_FINAL_TRY\\Concurrent_programming\\CarFerry.csproj",
+      "projectName": "CarFerry",
+      "projectPath": "C:\\Users\\dravi\\source\\repos\\PROJEKT_PW_FINAL_TRY\\Concurrent_programming\\CarFerry.csproj",
       "packagesPath": "C:\\Users\\dravi\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\dravi\\source\\repos\\PROJEKT_PW_FINAL_TRY\\Concurrent_programming\\obj\\",
       "projectStyle": "PackageReference",

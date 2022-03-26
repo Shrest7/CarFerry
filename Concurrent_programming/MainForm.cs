@@ -1,4 +1,4 @@
-﻿using PROJEKT_PW_WINFORMS.Properties;
+﻿using CarFerry.Properties;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -15,7 +15,8 @@ namespace PROJEKT_PW_FINAL_TRY
 {
     public partial class MainForm : Form
     {
-        public readonly static object listObj = new object(); // change
+        public static object LockObj { get; set; } =
+            new object();
         private const int _numberOfParkingSpaces = 10;
         private const int _ferryCapacity = 6;
         private readonly PictureBox[] _parkingFirstRiverbank;
@@ -26,8 +27,8 @@ namespace PROJEKT_PW_FINAL_TRY
         private readonly SemaphoreSlim _onBoardPlacesAvailable =
             new SemaphoreSlim(_ferryCapacity, _ferryCapacity);
         private int _carId;
-        private int _firstRiverbankIndex; // change
-        private int _secondRiverbankIndex; // change
+        private int _firstRiverbankIndex;
+        private int _secondRiverbankIndex;
         private readonly List<Car> _carsFirstRiverbank = new List<Car>();
         private readonly List<Car> _carsSecondRiverbank = new List<Car>();
         private readonly Ferry _ferry;
@@ -55,7 +56,7 @@ namespace PROJEKT_PW_FINAL_TRY
             mainThread.Start();
         }
 
-        public void MainThreadMethod()
+        private void MainThreadMethod()
         {
             Thread carGenerator = new Thread(GenerateCars);
             carGenerator.Start();
@@ -74,7 +75,8 @@ namespace PROJEKT_PW_FINAL_TRY
                 {
                     if (_ferry.Cars.Count == _ferryCapacity)
                     {
-                        _departureReasonLbl.Invoke((Action)(() => _departureReasonLbl.Text = "Ferry is full."));
+                        _departureReasonLbl.Invoke((Action)(() =>
+                            _departureReasonLbl.Text = "Ferry is full."));
                         _ferry.Travel();
                     }
                 }
@@ -85,8 +87,9 @@ namespace PROJEKT_PW_FINAL_TRY
                     {
 
                     }
-                    _departureReasonLbl.Invoke((Action)(() => _departureReasonLbl.Text = "Opposite riverbank has enough" +
-                        "cars to fully fill the ferry."));
+                    _departureReasonLbl.Invoke((Action)(() => 
+                        _departureReasonLbl.Text = "Opposite riverbank has enough cars" +
+                        " to fully fill the ferry."));
                     _ferry.Travel();
                     
                 }
@@ -97,14 +100,16 @@ namespace PROJEKT_PW_FINAL_TRY
                     {
 
                     }
-                    _departureReasonLbl.Invoke((Action)(() => _departureReasonLbl.Text = "Opposite riverbank has enough" +
-                        "cars to fully fill the ferry."));
+                    _departureReasonLbl.Invoke((Action)(() =>
+                        _departureReasonLbl.Text = "Opposite riverbank has enough cars" +
+                        " to fully fill the ferry."));
                     _ferry.Travel();
                     
                 }
                 else if (_ferry.WaitStopwatch.ElapsedMilliseconds > _ferry.PatienceThreshold)
                 {
-                    _departureReasonLbl.Invoke((Action)(() => _departureReasonLbl.Text = "Ferry has lost patience."));
+                    _departureReasonLbl.Invoke((Action)(() =>
+                        _departureReasonLbl.Text = "Ferry has lost patience."));
                     _ferry.Travel();
                 }
 
@@ -120,7 +125,7 @@ namespace PROJEKT_PW_FINAL_TRY
                 {
                     if (car.TravelFinished == true)
                     {
-                        lock (listObj)
+                        lock (LockObj)
                         {
                             _carsFirstRiverbank.Remove(car);
                             _ferry.Cars.Remove(car);
@@ -135,7 +140,7 @@ namespace PROJEKT_PW_FINAL_TRY
                 {
                     if (car.TravelFinished == true)
                     {
-                        lock (listObj)
+                        lock (LockObj)
                         {
                             _carsSecondRiverbank.Remove(car);
                             _ferry.Cars.Remove(car);
@@ -160,7 +165,7 @@ namespace PROJEKT_PW_FINAL_TRY
 
                     _parkingFirstRiverbank[pictureBoxId].Invoke((Action)(() => ShowCarFirstRiverbank(pictureBoxId)));
 
-                    lock (listObj)
+                    lock (LockObj)
                     {
                         _carsFirstRiverbank.Add(car);
                     }
@@ -175,7 +180,7 @@ namespace PROJEKT_PW_FINAL_TRY
 
                     _parkingSecondRiverbank[pictureBoxId].Invoke((Action)(() => ShowCarSecondRiverbank(pictureBoxId)));
 
-                    lock (listObj)
+                    lock (LockObj)
                     {
                         _carsSecondRiverbank.Add(car);
                     }
@@ -187,24 +192,21 @@ namespace PROJEKT_PW_FINAL_TRY
             }
         }
 
-        public void ShowCarFirstRiverbank(int pictureBoxId)
+        private void ShowCarFirstRiverbank(int pictureBoxId)
         {
             _parkingFirstRiverbank[pictureBoxId].Image = Resources.Car;
             _firstRiverbankLabels[pictureBoxId].Text = $"{_carId}";
         }
-        public void ShowCarSecondRiverbank(int pictureBoxId)
+        private void ShowCarSecondRiverbank(int pictureBoxId)
         {
             _parkingSecondRiverbank[pictureBoxId].Image = Resources.Car;
             _secondRiverbankLabels[pictureBoxId].Text = $"{_carId}";
         }
 
-        public void CosmeticChanges()
+        private void CosmeticChanges()
         {
-            label2.Parent = pictureBox1;
-            label2.BackColor = Color.Transparent;
             _departureReasonLbl.Parent = pictureBox1;
             _departureReasonLbl.BackColor = Color.Transparent;
-            label2.ForeColor = Color.White;
             _departureReasonLbl.ForeColor = Color.White;
 
             foreach(var label in _firstRiverbankLabels)

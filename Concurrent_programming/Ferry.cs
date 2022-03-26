@@ -1,4 +1,4 @@
-﻿using PROJEKT_PW_WINFORMS.Properties;
+﻿using CarFerry.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,7 +19,7 @@ namespace PROJEKT_PW_FINAL_TRY
         private readonly int _travelTime = 3000;
         private readonly PictureBox _ferryPictureBox;
         private readonly PictureBox[] _ferryParkingSpaces;
-        private readonly Label _DepartureReasonLbl;
+        private readonly Label _departureReasonLbl;
 
 
         private int _riverBank = 1;
@@ -42,7 +42,7 @@ namespace PROJEKT_PW_FINAL_TRY
         {
             _ferryPictureBox = pictureBoxFerry;
             _ferryParkingSpaces = pictureBoxesOnBoardPlaces;
-            _DepartureReasonLbl = lblDepartureReason;
+            _departureReasonLbl = lblDepartureReason;
             WaitStopwatch.Start();
         }
 
@@ -53,7 +53,7 @@ namespace PROJEKT_PW_FINAL_TRY
                 Thread.Sleep(300);
                 if (car.TravelFinished == false)
                 {
-                    lock (MainForm.listObj)
+                    lock (MainForm.LockObj)
                     {
                         Cars.Add(car);
                     }
@@ -73,7 +73,7 @@ namespace PROJEKT_PW_FINAL_TRY
                 else
                 {
                     var carToRemove = Cars.SingleOrDefault(s => s.Id == car.Id);
-                    lock (MainForm.listObj)
+                    lock (MainForm.LockObj)
                     {
                         Cars.Remove(carToRemove);
                     }
@@ -100,13 +100,13 @@ namespace PROJEKT_PW_FINAL_TRY
             SetOppositeRiverbank();
             WakeUpCarThreads();
 
-            _DepartureReasonLbl.Invoke((Action)(() => _DepartureReasonLbl.Text = ""));
+            _departureReasonLbl.Invoke((Action)(() => _departureReasonLbl.Text = ""));
 
             Travelling = false;
             WaitStopwatch.Restart();
         }
 
-        public void MoveFerryAndCars()
+        private void MoveFerryAndCars()
         {
             if(RiverBank == 1)
             {
@@ -128,7 +128,7 @@ namespace PROJEKT_PW_FINAL_TRY
             }
         }
 
-        public void SetOppositeRiverbank()
+        private void SetOppositeRiverbank()
         {
             if (RiverBank == 1)
             {
@@ -140,7 +140,7 @@ namespace PROJEKT_PW_FINAL_TRY
             }
         }
 
-        public void SetTravelStateToFinished()
+        private void SetTravelStateToFinished()
         {
             foreach(var car in Cars)
             {
@@ -148,7 +148,7 @@ namespace PROJEKT_PW_FINAL_TRY
             }
         }
 
-        public void WakeUpCarThreads()
+        private void WakeUpCarThreads()
         {
             foreach (var car in Cars)
             {
