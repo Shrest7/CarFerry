@@ -10,7 +10,12 @@
       "ProjectGuid": "10ff5d98-842e-43b6-88fa-cc89ff1baf68",
       "DisplayName": "CarFerry",
       "ColorIndex": 0
+    },
+    "92026b85-e7a7-463e-8fe1-e287e449cfc0": {
+      "ProjectGuid": "92026b85-e7a7-463e-8fe1-e287e449cfc0",
+      "DisplayName": "CarFerry",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }
